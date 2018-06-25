@@ -1,12 +1,40 @@
-<form action="/edit" method="POST">
+<div class="container">
 
-    <input type="hidden" name="id" value="{{id}}">
-    <input type="text" name="title" value="{{title}}">
+    <h1>
+
+        <span>Edit Todo</span>
+
+    </h1>
+
+
+    <form action="/edit" method="POST">
+
+        <input type="hidden" name="id" value="{{id}}">
+        <input type="text" name="title" value="{{title}}">
+
+        <br>
+        <br>
+        
+        <input type="submit">
+        <input type="reset">
+
+    </form>
+
+
+    <label for="finished">Todo Complete?:&nbsp;</label>
+
+    {{#if isdone}}
+
+        <input type="checkbox" name="finished" checked="checked">
+
+    {{else}}
+
+        <input type="checkbox" name="finished">
+
+    {{/if}}
 
     <br>
-    <br>
-    
-    <input type="submit">
-    <input type="reset">
 
-</form>
+    <a href="/"> Return to List</a>
+
+</div>

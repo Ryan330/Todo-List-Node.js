@@ -67,8 +67,15 @@ app.get("/:id/edit", (request, response) => {
 });
 
 app.post("/edit", (request, response) => {
+    let isDone = false;
+    if (request.body.finished) {isDone = true};
     todoList.setTitle(request.body.id, request.body.title)
-        .then(response.redirect(`/${request.body.id}`));
+    .then((data) => {
+        todoList.setFinished(request.body.id, isDone)
+        .then((data) => {
+            response.redirect(`/${request.body.id}`);
+        });
+    })
 });
 
 
