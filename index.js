@@ -4,8 +4,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const setupAuth = require("./auth");
-setupAuth(app);
-
+const ensureAuthenticated = require("./auth").ensureAuthenticated;
 
 const express = require("express");
 const app = express();
@@ -16,6 +15,7 @@ app.engine(".hbs", expressHbs({defaultLayout: "layout", extname: ".hbs"}));
 app.set("view engine", ".hbs");
 
 app.use(static("public"));
+setupAuth(app);
 
 
 //Body Parser
@@ -43,7 +43,7 @@ app.get("/", (request, response) => {
 
 
 //Add New Todo to List
-app.get("/new", (request, response) => {
+app.get("/new", ensureAuthenticated, (request, response) => {
     response.render("todo-create");
 });
 
