@@ -1,4 +1,12 @@
 //Init Express.js
+//Account Authentication
+const dotenv = require("dotenv");
+dotenv.config();
+
+const setupAuth = require("./auth");
+setupAuth(app);
+
+
 const express = require("express");
 const app = express();
 const static = express.static;
@@ -9,9 +17,11 @@ app.set("view engine", ".hbs");
 
 app.use(static("public"));
 
+
 //Body Parser
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({extended: false}));
+
 
 //Init Database
 const todoList = require("./db");

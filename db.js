@@ -7,6 +7,7 @@ const cn = {
   user: "postgres",
   password: ""
 };
+
 const db = pgp(cn);
 
 
