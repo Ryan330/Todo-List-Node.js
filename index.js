@@ -35,10 +35,11 @@ app.get("/", (request, response) => {
     .then((data) => {
         console.log(data);
         response.render("homepage", {
-            todos: data
+            todos: data,
+            isLoggedIn: request.isAuthenticated()
         });
     })
-    .catch((error) => { console.log(error)});
+    .catch((error) => {console.log(error)});
 });
 
 
@@ -47,7 +48,7 @@ app.get("/new", ensureAuthenticated, (request, response) => {
     response.render("todo-create");
 });
 
-app.post("/new", (request, response) => {
+app.post("/new", ensureAuthenticated, (request, response) => {
     console.log(request.body);
     todoList.add(request.body.title)
         .then((data) => {
@@ -63,7 +64,7 @@ app.get("/:id", (request, response) => {
         console.log(data);
         response.render("todo-details", data);
     })
-    .catch((error) => { console.log(error)});
+    .catch((error) => {console.log(error)});
 });
 
 
@@ -73,7 +74,7 @@ app.get("/:id/edit", (request, response) => {
     .then((data) => {
         response.render("todo-edit", data);
     })
-    .catch((error) => { console.log(error)});
+    .catch((error) => {console.log(error)});
 });
 
 app.post("/edit", (request, response) => {
@@ -95,7 +96,7 @@ app.get("/:id/delete", (request, response) => {
     .then((data) => {
         response.render("todo-delete", data);
     })
-    .catch((error) => { console.log(error)});
+    .catch((error) => {console.log(error)});
 });
 
 app.post("/delete", (request, response) => {
@@ -103,7 +104,7 @@ app.post("/delete", (request, response) => {
     .then((data) => {
         response.redirect("/");
     })
-    .catch((error) => { console.log(error)});
+    .catch((error) => {console.log(error)});
 });
 
 
